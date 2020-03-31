@@ -10,13 +10,14 @@ class UrlInfoService {
     private val slugRegex = Regex("""/.*$""")
 
     fun getUrlInfo(url: String): UrlInfo {
-        val document = Jsoup.connect(url).get()
-        val shortUrl = getShortUrl(url)
+        val validUrl = if (httpRegex.matches(url)) url else "https://$url"
+        val document = Jsoup.connect(validUrl).get()
+        val shortUrl = getShortUrl(validUrl)
         val title = getTitle(document)
         val imageUrl = getImageUrl(document)
         val description = getDescription(document)
 
-        return UrlInfo(url, shortUrl, title, description, imageUrl)
+        return UrlInfo(validUrl, shortUrl, title, description, imageUrl)
     }
 
     private fun getShortUrl(url: String) =
