@@ -1,6 +1,6 @@
 package eu.asquare.droplets.data
 
-import eu.asquare.droplets.presentation.DropletResource
+import eu.asquare.droplets.services.UrlInfo
 import javax.persistence.*
 
 @Entity
@@ -11,10 +11,17 @@ data class Droplet(
     @Column(columnDefinition = "INT UNSIGNED")
     val id: Long = 0,
 
-    val url: String
+    val url: String,
+    val title: String,
+    val description: String?,
+    @Column(name = "image_url")
+    val imageUrl: String?
 ) {
-    constructor(resource: DropletResource) : this(
-        resource.id,
-        resource.url
+    constructor(urlInfo: UrlInfo) : this(
+        0L,
+        urlInfo.url,
+        urlInfo.title,
+        urlInfo.description,
+        urlInfo.imageUrl
     )
 }

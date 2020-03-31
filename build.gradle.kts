@@ -41,6 +41,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8") {
         because("Java")
     }
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core") {
+        because("We want to use coroutines")
+    }
     implementation("org.jetbrains.kotlin:kotlin-allopen") {
         because("We need open classes for Spring annotations")
     }
@@ -52,6 +55,9 @@ dependencies {
     }
     implementation("org.flywaydb:flyway-core") {
         because("We migrate our database with flyway scripts")
+    }
+    implementation("org.jsoup:jsoup:1.13.1") {
+        because("It can read and parse target websites")
     }
 
     developmentOnly("org.springframework.boot:spring-boot-devtools") {

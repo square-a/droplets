@@ -7,17 +7,17 @@ import org.springframework.stereotype.Service
 
 @Service
 class DropletService(
-    private val dropletRepository: DropletRepository
+    private val dropletRepository: DropletRepository,
+    private val urlInfoService: UrlInfoService
 ) {
     fun create(resource: DropletResource) {
-        val droplet = Droplet(resource)
+        val urlInfo = urlInfoService.getUrlInfo(resource.url)
+        val droplet = Droplet(urlInfo)
 
         dropletRepository.save(droplet)
     }
 
     fun getAll() = dropletRepository.findAll().map {
-        DropletResource(
-            it
-        )
+        DropletResource(it)
     }
 }
