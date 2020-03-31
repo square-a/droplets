@@ -1,6 +1,5 @@
 package eu.asquare.shareme.droplets
 
-import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
@@ -14,7 +13,7 @@ class DropletController(
 
   @GetMapping
   fun listDroplets(model: Model): String {
-    model["title"] = "Droplets"
+    model["droplets"] = dropletService.getAll()
     return "droplets"
   }
 

@@ -10,7 +10,7 @@ data class Droplet(
         @Column(columnDefinition = "INT UNSIGNED")
         val id: Long = 0,
 
-        val url: String? = null
+        val url: String
 ) {
   constructor(resource: DropletResource): this(
           resource.id,

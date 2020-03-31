@@ -11,4 +11,6 @@ class DropletService(
 
     dropletRepository.save(droplet)
   }
+
+  fun getAll() = dropletRepository.findAll().map { DropletResource(it) }
 }

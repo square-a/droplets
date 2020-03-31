@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{title}}</title>
+    <title>Droplets</title>
 </head>
 <body>
-    <h1>{{title}}</h1>
+    <h1>Droplets</h1>
     <form action="/droplets" method="post">
         <label>
             Url:
@@ -14,5 +14,10 @@
             <button type="submit">Submit</button>
         </label>
     </form>
+    <ul>
+        {{#droplets}}
+            <li>{{url}}</li>
+        {{/droplets}}
+    </ul>
 </body>
 </html>

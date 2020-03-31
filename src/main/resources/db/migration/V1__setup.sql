@@ -1,4 +1,4 @@
 CREATE TABLE droplets (
     id      INT UNSIGNED    NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    url     VARCHAR(255)
+    url     VARCHAR(255)    NOT NULL
 );
