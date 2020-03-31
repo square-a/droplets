@@ -1,50 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Droplets</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.1/css/bulma.min.css"/>
-</head>
-<body class="container">
+{{#layout}}
+<div class="container white">
+    <h1 class="page-title red-text darken-4">Droplet Sharing</h1>
 
-<header class="hero">
-    <div class="hero-body">
-        <h1 class="title">Share your Droplet</h1>
-    </div>
-</header>
-<section class="panel">
-    <h2 class="panel-heading">Create Droplet</h2>
-    <div class="panel-block">
-        <form action="/droplets" method="post" class="container">
-            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-            <div class="field has-addons">
-                <div class="control is-expanded">
-                    <input
-                            type="text"
-                            name="url"
-                            placeholder="New Droplet url"
-                            class="input"
-                    />
-                </div>
-                <div class="control">
-                    <button type="submit" class="button is-link">
-                        Submit
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-</section>
-<section class="panel">
-    <h2 class="panel-heading">Existing Droplets</h2>
-    <div class="panel-block">
-        <ul class="container">
-            {{#droplets}}
-                <li class="box">{{url}}</li>
-            {{/droplets}}
-        </ul>
-    </div>
-</section>
+    {{>droplet-form}}
 
-</body>
-</html>
+    <section class="panel">
+        <h2 class="panel-heading">Existing Droplets</h2>
+        <div class="panel-block">
+            <ul class="container">
+                {{#droplets}}
+                    {{>droplet-item}}
+                {{/droplets}}
+            </ul>
+        </div>
+    </section>
+</div>
+{{/layout}}
+{{>layout}}

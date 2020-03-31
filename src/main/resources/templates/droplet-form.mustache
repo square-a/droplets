@@ -1,0 +1,15 @@
+<section class="card blue-grey darken-4">
+    <form action="/droplets" method="post" class="card-content row">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        <div class="input-field col s12">
+            <input
+                    type="text"
+                    name="url"
+                    id="droplet-url"
+                    placeholder="a-square.eu/something-funny"
+                    class="input white-text url-input"
+            />
+            <label for="droplet-url">Url</label>
+        </div>
+    </form>
+</section>
