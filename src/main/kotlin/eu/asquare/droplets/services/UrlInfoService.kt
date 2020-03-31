@@ -6,15 +6,21 @@ import org.springframework.stereotype.Service
 
 @Service
 class UrlInfoService {
+    private val httpRegex = Regex("""^https?://(www\.)?""")
+    private val slugRegex = Regex("""/.*$""")
 
     fun getUrlInfo(url: String): UrlInfo {
         val document = Jsoup.connect(url).get()
+        val shortUrl = getShortUrl(url)
         val title = getTitle(document)
         val imageUrl = getImageUrl(document)
         val description = getDescription(document)
 
-        return UrlInfo(url, title, description, imageUrl)
+        return UrlInfo(url, shortUrl, title, description, imageUrl)
     }
+
+    private fun getShortUrl(url: String) =
+        url.replace(httpRegex, "").replace(slugRegex, "")
 
     private fun getTitle(document: Document): String {
         document.select("meta[property=og:title]").firstOrNull()?.run {

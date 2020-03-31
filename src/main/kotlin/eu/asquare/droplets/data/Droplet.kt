@@ -12,14 +12,19 @@ data class Droplet(
     val id: Long = 0,
 
     val url: String,
+
+    @Column(name = "short_url")
+    val shortUrl: String,
     val title: String,
     val description: String?,
+
     @Column(name = "image_url")
     val imageUrl: String?
 ) {
     constructor(urlInfo: UrlInfo) : this(
         0L,
         urlInfo.url,
+        urlInfo.shortUrl,
         urlInfo.title,
         urlInfo.description,
         urlInfo.imageUrl
