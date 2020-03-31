@@ -1,4 +1,4 @@
-package eu.asquare.shareme
+package eu.asquare.droplets
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class Application
 
 fun main() {
-  runApplication<Application>()
+    runApplication<Application>()
 }
