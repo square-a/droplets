@@ -4,16 +4,11 @@
 
     {{>droplet-form}}
 
-    <section class="panel">
-        <h2 class="panel-heading">Existing Droplets</h2>
-        <div class="panel-block">
-            <ul class="container">
-                {{#droplets}}
-                    {{>droplet-item}}
-                {{/droplets}}
-            </ul>
-        </div>
-    </section>
+    <ul class="section">
+        {{#droplets}}
+            {{>droplet-item}}
+        {{/droplets}}
+    </ul>
 </div>
 {{/layout}}
 {{>layout}}
