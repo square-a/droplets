@@ -1,7 +1,6 @@
 package eu.asquare.droplets.presentation
 
 import eu.asquare.droplets.data.Droplet
-import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 
 data class DropletResource(
@@ -11,6 +10,7 @@ data class DropletResource(
     val description: String?,
     val imageUrl: String?,
     val created: String,
+    val isRead: Boolean,
     val userName: String,
     var shortUrl: String? = null
 ) {
@@ -21,6 +21,7 @@ data class DropletResource(
         droplet.description,
         droplet.imageUrl,
         droplet.created.format(DateTimeFormatter.ofPattern("d MMM yy")),
-        droplet.user?.name ?: "someone"
+        droplet.isRead,
+        droplet.user?.name ?: ""
     )
 }

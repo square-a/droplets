@@ -4,7 +4,9 @@ import eu.asquare.droplets.data.Droplet
 import eu.asquare.droplets.data.DropletRepository
 import eu.asquare.droplets.data.UserRepository
 import eu.asquare.droplets.presentation.DropletResource
+import eu.asquare.droplets.presentation.DropletViewModel
 import org.springframework.stereotype.Service
+import javax.persistence.EntityNotFoundException
 
 @Service
 class DropletService(
@@ -20,8 +22,26 @@ class DropletService(
         dropletRepository.save(droplet)
     }
 
-    fun getAll() = dropletRepository.findAll().map { droplet ->
-        val shortUrl = urlInfoService.getShortUrl(droplet.url)
-        DropletResource(droplet).also { it.shortUrl = shortUrl }
-    }.sortedByDescending { it.created }
+    fun getViewModel(): DropletViewModel {
+        val droplets = dropletRepository.findAll()
+            .sortedByDescending { it.created }
+            .map { droplet ->
+                val shortUrl = urlInfoService.getShortUrl(droplet.url)
+                DropletResource(droplet).also { it.shortUrl = shortUrl }
+            }
+            .groupBy { it.isRead }
+
+        return DropletViewModel(
+            droplets[false] ?: listOf(),
+            droplets[true] ?: listOf()
+        )
+    }
+
+    fun markAsRead(id: Long) {
+        val droplet = dropletRepository.findById(id).orElseThrow {
+            EntityNotFoundException("No Droplet found for id $id")
+        }
+        droplet.isRead = true
+        dropletRepository.save(droplet)
+    }
 }

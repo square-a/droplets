@@ -5,10 +5,7 @@ import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 
 @Controller
 @RequestMapping(path = ["/"])
@@ -18,7 +15,7 @@ class DropletController(
 
     @GetMapping
     fun listDroplets(model: Model): String {
-        model["droplets"] = dropletService.getAll()
+        model["droplets"] = dropletService.getViewModel()
         return "droplets"
     }
 
@@ -30,5 +27,14 @@ class DropletController(
     ): String {
         dropletService.create(formData.url, authentication.name)
         return "redirect:/"
+    }
+
+    @PostMapping(value = ["droplets/{id}"])
+    @ResponseBody
+    fun markDropletRead(
+        @PathVariable
+        id: Long
+    ) {
+        dropletService.markAsRead(id)
     }
 }

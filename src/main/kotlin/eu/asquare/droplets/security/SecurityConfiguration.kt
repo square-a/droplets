@@ -2,6 +2,7 @@ package eu.asquare.droplets.security
 
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 
@@ -11,12 +12,22 @@ class SecurityConfiguration(
     private val groupCodeEncoder: GroupCodeEncoder
 ) : WebSecurityConfigurerAdapter() {
 
+    override fun configure(web: WebSecurity) {
+        web
+            .ignoring()
+            .antMatchers("/img/**")
+            .antMatchers("/css/**")
+            .antMatchers("/js/**")
+    }
+
     override fun configure(http: HttpSecurity) {
-        http.authorizeRequests()
-            .antMatchers("/").authenticated()
-            .anyRequest().permitAll()
-            .and()
-            .formLogin().permitAll()
+        http.csrf().disable()
+            .authorizeRequests()
+                .antMatchers("/login").permitAll()
+                .anyRequest().authenticated()
+                .and()
+            .formLogin()
+                .permitAll()
     }
 
     override fun configure(auth: AuthenticationManagerBuilder) {

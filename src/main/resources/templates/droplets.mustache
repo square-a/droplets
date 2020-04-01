@@ -5,9 +5,14 @@
     {{>droplet-form}}
 
     <ul class="section">
-        {{#droplets}}
+        {{#droplets.unread}}
             {{>droplet-item}}
-        {{/droplets}}
+        {{/droplets.unread}}
+    </ul>
+    <ul class="section is-read" data-list="read">
+        {{#droplets.read}}
+            {{>droplet-item}}
+        {{/droplets.read}}
     </ul>
 </div>
 {{/layout}}

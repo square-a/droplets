@@ -17,7 +17,12 @@
             {{#description}}<p>{{.}}</p>{{/description}}
         </div>
         <div class="card-action">
-            <a href="{{url}}">{{shortUrl}}</a>
+            <a
+                    href="{{url}}"
+                    target="_blank"
+                    data-action="read"
+                    data-id="{{id}}"
+            >{{shortUrl}}</a>
         </div>
     </div>
 </li>

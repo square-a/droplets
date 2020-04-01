@@ -22,7 +22,10 @@ data class Droplet(
     val imageUrl: String?,
 
     @CreationTimestamp
-    val created: LocalDateTime = LocalDateTime.now()
+    val created: LocalDateTime = LocalDateTime.now(),
+
+    @Column(name = "is_read")
+    var isRead: Boolean = false
 ) {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

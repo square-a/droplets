@@ -9,7 +9,7 @@ class UrlInfoService {
     private val isValidUrlRegex = Regex("""^https?://(www\.)?(?>.*)""")
     private val httpRegex = Regex("""^https?://(www\.)?""")
     private val slugRegex = Regex("""/.*$""")
-    private val maxTitleLength = 50
+    private val maxTitleLength = 100
     private val maxDescriptionLength = 500
 
     fun getUrlInfo(input: String): UrlInfo {
