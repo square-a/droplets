@@ -1,5 +1,7 @@
 body {
+    position: relative;
     min-height: 100vh;
+    padding-top: 1px;
 }
 
 h1.page-title {
@@ -26,4 +28,8 @@ img.url-image {
 
 footer.page-footer {
     font-size: .8rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

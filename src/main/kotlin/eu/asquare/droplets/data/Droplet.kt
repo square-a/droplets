@@ -13,8 +13,6 @@ data class Droplet(
 
     val url: String,
 
-    @Column(name = "short_url")
-    val shortUrl: String,
     val title: String,
     val description: String?,
 
@@ -24,7 +22,6 @@ data class Droplet(
     constructor(urlInfo: UrlInfo) : this(
         0L,
         urlInfo.url,
-        urlInfo.shortUrl,
         urlInfo.title,
         urlInfo.description,
         urlInfo.imageUrl

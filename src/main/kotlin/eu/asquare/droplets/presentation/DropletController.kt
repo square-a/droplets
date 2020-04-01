@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
-@RequestMapping(path = ["droplets"])
+@RequestMapping(path = ["/"])
 class DropletController(
     private val dropletService: DropletService
 ) {
@@ -24,9 +24,9 @@ class DropletController(
     @PostMapping
     fun createDroplet(
         @ModelAttribute
-        resource: DropletResource
+        formData: DropletFormData
     ): String {
-        dropletService.create(resource)
-        return "redirect:/droplets"
+        dropletService.create(formData.url)
+        return "redirect:/"
     }
 }

@@ -6,24 +6,28 @@ import org.springframework.stereotype.Service
 
 @Service
 class UrlInfoService {
+    private val isValidUrlRegex = Regex("""^https?://(www\.)?(?>.*)""")
     private val httpRegex = Regex("""^https?://(www\.)?""")
     private val slugRegex = Regex("""/.*$""")
 
-    fun getUrlInfo(url: String): UrlInfo {
-        val validUrl = if (httpRegex.matches(url)) url else "https://$url"
-        val document = Jsoup.connect(validUrl).get()
-        val shortUrl = getShortUrl(validUrl)
-        val title = getTitle(document)
-        val imageUrl = getImageUrl(document)
-        val description = getDescription(document)
+    fun getUrlInfo(input: String): UrlInfo {
+        val url = getValidUrl(input)
 
-        return UrlInfo(validUrl, shortUrl, title, description, imageUrl)
+        Jsoup.connect(url).get().also { document: Document ->
+            return UrlInfo(
+                url,
+                title = getDocumentTitle(document),
+                description = getDocumentDescription(document),
+                imageUrl = getDocumentImageUrl(document)
+            )
+        }
     }
 
-    private fun getShortUrl(url: String) =
-        url.replace(httpRegex, "").replace(slugRegex, "")
+    fun getShortUrl(url: String) = url.replace(httpRegex, "").replace(slugRegex, "")
 
-    private fun getTitle(document: Document): String {
+    private fun getValidUrl(input: String) = if (isValidUrlRegex.matches(input)) input else "https://$input"
+
+    private fun getDocumentTitle(document: Document): String {
         document.select("meta[property=og:title]").firstOrNull()?.run {
             return attr("content")
         }
@@ -34,7 +38,7 @@ class UrlInfoService {
         return "---"
     }
 
-    private fun getDescription(document: Document): String? {
+    private fun getDocumentDescription(document: Document): String? {
         document.select("meta[property=og:description]").firstOrNull()?.run {
             return attr("content")
         }
@@ -45,7 +49,7 @@ class UrlInfoService {
         return null
     }
 
-    private fun getImageUrl(document: Document): String? {
+    private fun getDocumentImageUrl(document: Document): String? {
         document.select("meta[property=og:image]").firstOrNull()?.run {
             return attr("content")
         }

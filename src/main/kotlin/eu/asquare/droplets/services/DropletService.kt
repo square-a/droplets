@@ -10,14 +10,15 @@ class DropletService(
     private val dropletRepository: DropletRepository,
     private val urlInfoService: UrlInfoService
 ) {
-    fun create(resource: DropletResource) {
-        val urlInfo = urlInfoService.getUrlInfo(resource.url)
+    fun create(url: String) {
+        val urlInfo = urlInfoService.getUrlInfo(url)
         val droplet = Droplet(urlInfo)
 
         dropletRepository.save(droplet)
     }
 
-    fun getAll() = dropletRepository.findAll().map {
-        DropletResource(it)
+    fun getAll() = dropletRepository.findAll().map { droplet ->
+        val shortUrl = urlInfoService.getShortUrl(droplet.url)
+        DropletResource(droplet).also { it.shortUrl = shortUrl }
     }
 }
