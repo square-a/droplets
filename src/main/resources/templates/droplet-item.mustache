@@ -10,7 +10,9 @@
     {{/imageUrl}}
     <div class="card-stacked">
         <div class="card-content">
-            <span class="blue-grey-text lighten-2 url-posted-by">{{userName}}</span>
+            <span class="blue-grey-text lighten-2 url-posted-by">
+                {{userName}} | {{created}}
+            </span>
             <span class="card-title">{{title}}</span>
             {{#description}}<p>{{.}}</p>{{/description}}
         </div>

@@ -1,7 +1,8 @@
 package eu.asquare.droplets.presentation
 
 import eu.asquare.droplets.data.Droplet
-import java.time.LocalDateTime
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 
 data class DropletResource(
     val id: Long = 0,
@@ -9,7 +10,7 @@ data class DropletResource(
     val title: String?,
     val description: String?,
     val imageUrl: String?,
-    val created: LocalDateTime,
+    val created: String,
     val userName: String,
     var shortUrl: String? = null
 ) {
@@ -19,7 +20,7 @@ data class DropletResource(
         droplet.title,
         droplet.description,
         droplet.imageUrl,
-        droplet.created,
+        droplet.created.format(DateTimeFormatter.ofPattern("d MMM yy")),
         droplet.user?.name ?: "someone"
     )
 }
