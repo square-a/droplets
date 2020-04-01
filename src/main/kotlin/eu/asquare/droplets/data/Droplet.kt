@@ -24,6 +24,10 @@ data class Droplet(
     @CreationTimestamp
     val created: LocalDateTime = LocalDateTime.now()
 ) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    var user: User? = null
+
     constructor(urlInfo: UrlInfo) : this(
         0L,
         urlInfo.url,
