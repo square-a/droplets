@@ -20,5 +20,5 @@ class DropletService(
     fun getAll() = dropletRepository.findAll().map { droplet ->
         val shortUrl = urlInfoService.getShortUrl(droplet.url)
         DropletResource(droplet).also { it.shortUrl = shortUrl }
-    }
+    }.sortedByDescending { it.created }
 }

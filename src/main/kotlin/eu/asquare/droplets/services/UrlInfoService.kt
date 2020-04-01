@@ -9,6 +9,8 @@ class UrlInfoService {
     private val isValidUrlRegex = Regex("""^https?://(www\.)?(?>.*)""")
     private val httpRegex = Regex("""^https?://(www\.)?""")
     private val slugRegex = Regex("""/.*$""")
+    private val maxTitleLength = 50
+    private val maxDescriptionLength = 500
 
     fun getUrlInfo(input: String): UrlInfo {
         val url = getValidUrl(input)
@@ -16,8 +18,8 @@ class UrlInfoService {
         Jsoup.connect(url).get().also { document: Document ->
             return UrlInfo(
                 url,
-                title = getDocumentTitle(document),
-                description = getDocumentDescription(document),
+                title = getDocumentTitle(document).take(maxTitleLength),
+                description = getDocumentDescription(document)?.take(maxDescriptionLength),
                 imageUrl = getDocumentImageUrl(document)
             )
         }

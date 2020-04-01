@@ -1,6 +1,7 @@
 package eu.asquare.droplets.presentation
 
 import eu.asquare.droplets.data.Droplet
+import java.time.LocalDateTime
 
 data class DropletResource(
     val id: Long = 0,
@@ -8,6 +9,7 @@ data class DropletResource(
     val title: String?,
     val description: String?,
     val imageUrl: String?,
+    val created: LocalDateTime,
     var shortUrl: String? = null
 ) {
     constructor(droplet: Droplet) : this(
@@ -15,6 +17,7 @@ data class DropletResource(
         droplet.url,
         droplet.title,
         droplet.description,
-        droplet.imageUrl
+        droplet.imageUrl,
+        droplet.created
     )
 }

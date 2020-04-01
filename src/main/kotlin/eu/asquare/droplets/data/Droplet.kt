@@ -1,6 +1,9 @@
 package eu.asquare.droplets.data
 
 import eu.asquare.droplets.services.UrlInfo
+import org.hibernate.annotations.CreationTimestamp
+import java.sql.Timestamp
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -12,12 +15,14 @@ data class Droplet(
     val id: Long = 0,
 
     val url: String,
-
     val title: String,
     val description: String?,
 
     @Column(name = "image_url")
-    val imageUrl: String?
+    val imageUrl: String?,
+
+    @CreationTimestamp
+    val created: LocalDateTime = LocalDateTime.now()
 ) {
     constructor(urlInfo: UrlInfo) : this(
         0L,
