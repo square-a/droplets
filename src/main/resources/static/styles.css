@@ -17,6 +17,10 @@ input.input.url-input {
     font-weight: 300;
 }
 
+.url-posted-by {
+    font-size: 12px;
+}
+
 .card-image.col {
     padding: 0;
 }

@@ -10,6 +10,7 @@ data class DropletResource(
     val description: String?,
     val imageUrl: String?,
     val created: LocalDateTime,
+    val userName: String,
     var shortUrl: String? = null
 ) {
     constructor(droplet: Droplet) : this(
@@ -18,6 +19,7 @@ data class DropletResource(
         droplet.title,
         droplet.description,
         droplet.imageUrl,
-        droplet.created
+        droplet.created,
+        droplet.user?.name ?: "someone"
     )
 }

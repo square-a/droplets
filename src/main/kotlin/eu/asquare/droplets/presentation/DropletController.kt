@@ -1,6 +1,7 @@
 package eu.asquare.droplets.presentation
 
 import eu.asquare.droplets.services.DropletService
+import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
@@ -23,10 +24,11 @@ class DropletController(
 
     @PostMapping
     fun createDroplet(
+        authentication: Authentication,
         @ModelAttribute
         formData: DropletFormData
     ): String {
-        dropletService.create(formData.url)
+        dropletService.create(formData.url, authentication.name)
         return "redirect:/"
     }
 }
