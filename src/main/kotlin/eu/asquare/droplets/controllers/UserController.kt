@@ -29,6 +29,20 @@ class UserController(
         return "users"
     }
 
+    @PostMapping
+    fun createUser(
+        authentication: Authentication,
+        @ModelAttribute
+        formData: UserResource
+    ): String {
+        val createdBy = userService.getOne(authentication.name)
+        if (createdBy != null) {
+            userService.create(createdBy.group, formData.name)
+        }
+
+        return "redirect:/users"
+    }
+
     @PostMapping(value = ["{id}"])
     fun updateUser(
         authentication: Authentication,

@@ -5,12 +5,18 @@ import eu.asquare.droplets.data.User
 import eu.asquare.droplets.data.UserRepository
 import eu.asquare.droplets.presentation.UserResource
 import org.springframework.stereotype.Service
+import javax.persistence.EntityExistsException
 
 @Service
 class UserService(
     private val userRepository: UserRepository
 ) {
-    fun create(group: Group) = userRepository.save(User(0L, "admin", group))
+    fun create(group: Group, name: String = "admin-${group.id}"): User {
+        if (userRepository.findByName(name) != null) {
+            throw EntityExistsException("Username $name already taken")
+        }
+        return userRepository.save(User(0L, name, group))
+    }
 
     fun getOne(username: String) = userRepository.findByName(username)
 
@@ -22,8 +28,11 @@ class UserService(
         }
 
         if (user != null && user.group == group) {
-            user.name = username
+            if (userRepository.findByName(username) != null) {
+                throw EntityExistsException("Username $username already taken")
+            }
 
+            user.name = username
             userRepository.save(user)
         }
     }

@@ -22,6 +22,25 @@
                     </form>
                 </li>
             {{/users}}
+            <li class="collection-item">
+                <form action="/users" method="post">
+                    <input
+                            type="text"
+                            name="name"
+                            class="name-input"
+                            required="required"
+                            placeholder="new user"
+                    />
+                    <input type="hidden" name="id" value="0" />
+                    <button
+                            type="submit"
+                            class="btn secondary-content"
+                    >
+                        create
+                        <i class="material-icons right">send</i>
+                    </button>
+                </form>
+            </li>
         </ul>
     </div>
 {{/layout}}
