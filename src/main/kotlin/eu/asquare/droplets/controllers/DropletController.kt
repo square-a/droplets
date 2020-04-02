@@ -17,6 +17,8 @@ class DropletController(
     @GetMapping
     fun showDroplets(model: Model): String {
         model["droplets"] = dropletService.getViewModel()
+
+        model["page"] = "droplets"
         return "droplets"
     }
 

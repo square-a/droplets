@@ -13,7 +13,18 @@ const getClickListener = id => async event => {
     }
 };
 
+const setupNavLinks = () => {
+    const activePage = document.querySelector('[data-active-page').dataset.activePage;
+    const activePageLink = document.querySelector(`[data-link="${activePage}"]`);
+
+    if (activePageLink) {
+        activePageLink.classList.add('active');
+    }
+};
+
 window.onload = () => {
+    setupNavLinks();
+
     readList = document.querySelector('[data-list="read"]');
 
     document.querySelectorAll('[data-action="read"]').forEach(element => {

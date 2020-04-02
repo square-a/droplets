@@ -13,12 +13,11 @@ class GroupService(
 
     fun isInitialGroup() = groupRepository.count() == 0L
 
-    fun getInitialGroupCode(): Int {
+    // NOTE: with some really bad luck this might already break for the second group
+    fun create(): Group {
         val code = (minCode..maxCode).shuffled().first()
         val group = Group(0L, code)
 
-        groupRepository.save(group).let {
-            return it.code
-        }
+        return groupRepository.save(group)
     }
 }

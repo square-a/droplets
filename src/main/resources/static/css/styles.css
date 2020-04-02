@@ -1,11 +1,25 @@
 body {
     position: relative;
     min-height: 100vh;
-    padding-top: 1px;
 }
 
-.login-container {
-    margin-top: 60px;
+nav .brand-logo {
+    padding-left: 24px;
+    font-weight: 300;
+}
+
+.brand-logo>.material-icons {
+    float: unset !important;
+    display: inline;
+}
+
+form {
+    position: relative;
+    overflow: hidden;
+}
+
+.username {
+    font-family: monospace;
 }
 
 .code-title {
@@ -15,6 +29,7 @@ body {
 input.hidden-submit-button {
     position: absolute;
     right: -1000px;
+    pointer-events: none;
 }
 
 input.input {

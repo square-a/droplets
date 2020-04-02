@@ -1,10 +1,13 @@
 {{#layout}}
-    <div class="container login-container">
+    <div class="container section">
         {{#groupCode}}
             <section class="card lime blue-grey-text text-darken-3">
                 <div class="card-content">
                     <span class="card-title">welcome</span>
-                    <p>Looks like you're just about to start sharing droplets. Here's your group code:</p>
+                    <p>
+                        Looks like you're just about to start sharing droplets.
+                        You can login as <span class="username">admin</span> with the following group code:
+                    </p>
                     <h2 class="code-title">{{groupCode}}</h2>
                 </div>
             </section>
@@ -32,7 +35,7 @@
                     />
                     <label for="password">group code</label>
                 </div>
-                <input type="submit" class="hidden-submit-button" />
+                <input type="submit" class="hidden-submit-button" tabIndex="-1" />
             </form>
         </section>
     </div>
