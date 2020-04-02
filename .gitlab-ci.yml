@@ -1,0 +1,59 @@
+stages:
+  - build
+  - package
+  - deploy
+
+build:
+  stage: build
+  image: openjdk:13-jdk-alpine3.10
+  script:
+    - ./gradlew build
+  artifacts:
+    paths:
+      - build/libs/*.jar
+
+package:
+  stage: package
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker build -t registry.gitlab.com/a-square/droplets .
+    - docker push registry.gitlab.com/a-square/droplets
+  only:
+    - master
+
+deploy_staging:
+  stage: deploy
+  image: alpine:3.10.3
+  before_script:
+    - 'which ssh-agent || (apk add --update openssh-client )'
+    - eval $(ssh-agent -s)
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-add ~/.ssh/id_rsa
+  script:
+    - apk upgrade && apk update
+    - apk add openssh-client
+    - apk add sshpass
+    - ssh -o StrictHostKeyChecking=no $STAGING_USER@$STAGING_URL
+      docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - ssh -o StrictHostKeyChecking=no $STAGING_USER@$STAGING_URL
+      docker pull registry.gitlab.com/a-square/droplets
+    - ssh -o StrictHostKeyChecking=no $STAGING_USER@$STAGING_URL
+      "docker container stop droplets && docker container rm droplets || true"
+    - ssh -o StrictHostKeyChecking=no $STAGING_USER@$STAGING_URL
+      "docker run
+      --network='host'
+      -e DATABASE_URL=$DATABASE_URL
+      -e DATABASE_NAME=$DATABASE_NAME
+      -e DATABASE_USER=$DATABASE_USER
+      -e DATABASE_PASSWORD=$DATABASE_PASSWORD
+      -e SPRING_PROFILES_ACTIVE=$ACTIVE_PROFILES
+      --name droplets
+      -p 8080:8080
+      -d registry.gitlab.com/a-square/droplets"
+  only:
+    - master
