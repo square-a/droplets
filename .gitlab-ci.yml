@@ -51,7 +51,6 @@ deploy_staging:
       -e DATABASE_NAME=$DATABASE_NAME
       -e DATABASE_USER=$DATABASE_USER
       -e DATABASE_PASSWORD=$DATABASE_PASSWORD
-      -e SPRING_PROFILES_ACTIVE=$ACTIVE_PROFILES
       --name droplets
       -p 8080:8080
       -d registry.gitlab.com/a-square/droplets"

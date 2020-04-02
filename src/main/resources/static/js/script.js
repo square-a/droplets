@@ -4,7 +4,8 @@ const getClickListener = id => async event => {
     try {
 
         await fetch(`${API_URL}/${id}`, { method: 'POST' });
-        event.target.closest('li').parentNode.removeChild(event.target);
+        const listElement = event.target.closest('li');
+        listElement.parentNode.removeChild(listElement);
 
     } catch(e) {
         console.log(e)
