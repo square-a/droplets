@@ -1,0 +1,28 @@
+{{#layout}}
+    <div class="container section">
+        <ul class="card collection">
+            {{#users}}
+                <li class="collection-item">
+                    <form action="/users/{{id}}" method="post">
+                        <input
+                                type="text"
+                                name="name"
+                                value="{{name}}"
+                                class="name-input"
+                                required="required"
+                        />
+                        <input type="hidden" name="id" value="{{id}}" />
+                        <button
+                            type="submit"
+                            class="btn secondary-content"
+                        >
+                            change name
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </form>
+                </li>
+            {{/users}}
+        </ul>
+    </div>
+{{/layout}}
+{{>layout}}

@@ -35,7 +35,7 @@ class DropletController(
         return "droplets"
     }
 
-    @PostMapping
+    @PostMapping(value = ["droplets"])
     fun createDroplet(
         authentication: Authentication,
         @ModelAttribute

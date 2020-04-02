@@ -80,6 +80,11 @@ img.url-image {
     height: 100%;
 }
 
+input.name-input {
+    width: auto !important;
+    margin: 0 !important;
+}
+
 footer.page-footer {
     font-size: .8rem;
     position: absolute;
