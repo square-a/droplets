@@ -1,4 +1,4 @@
-<section class="card blue-grey darken-4">
+<section class="card blue-grey darken-4  orange-text text-accent-2">
     <form action="/" method="post" class="card-content row">
         <div class="input-field col s12">
             <input
@@ -6,9 +6,33 @@
                     name="url"
                     id="droplet-url"
                     placeholder="a-square.eu/something-funny"
-                    class="input white-text url-input"
+                    class="input url-input"
+                    autofocus="true"
             />
             <label for="droplet-url">url</label>
         </div>
     </form>
+    <div class="card-content grey lighten-5">
+        <form action="/" method="get" class="row">
+            <div class="switch">
+                <label class="blue-grey-text text-darken-4">
+                    unread
+                    <input
+                            type="checkbox"
+                            {{^filter.onlyUnread}}checked="true"{{/filter.onlyUnread}}
+                            name="showAll"
+                            value="true"
+                    />
+                    <span class="lever"></span>
+                    all
+                </label>
+                <button
+                        type="submit"
+                        class="btn right orange accent-2"
+                >
+                    filter
+                </button>
+            </div>
+        </form>
+    </div>
 </section>

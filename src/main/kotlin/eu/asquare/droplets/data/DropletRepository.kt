@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface DropletRepository : JpaRepository<Droplet, Long> {
     fun findAllByGroupIdAndIsReadFalse(groupId: Long): List<Droplet>
-    fun findAllByGroupIdAndIsReadTrue(groupId: Long): List<Droplet>
+    fun findAllByGroupId(groupId: Long): List<Droplet>
 }

@@ -3,6 +3,10 @@ body {
     min-height: 100vh;
 }
 
+.row {
+    margin-bottom: 0 !important;
+}
+
 nav .brand-logo {
     padding-left: 24px;
     font-weight: 300;
@@ -41,11 +45,23 @@ input.input.url-input {
     font-weight: 300;
 }
 
+.switch>label {
+    font-size: inherit;
+}
+
+.lever {
+    background-color: #ffab40 !important;
+}
+
+.lever::after {
+    background-color: #ff6d00 !important;
+}
+
 body>.container {
     padding-bottom: 1rem;
 }
 
-ul.is-read {
+li.is-read {
     opacity: .7;
     filter: grayscale(80%);
 }

@@ -20,11 +20,14 @@ class DropletController(
     @GetMapping
     fun showDroplets(
         authentication: Authentication,
-        model: Model
+        model: Model,
+        @RequestParam
+        showAll: Boolean = false
     ): String {
         val user = userService.getOne(authentication.name)
         if (user != null) {
-            val filter = DropletFilter(true)
+            val filter = DropletFilter(!showAll)
+            model["filter"] = filter
             model["droplets"] = dropletService.getMany(user.group.id, filter)
         }
 

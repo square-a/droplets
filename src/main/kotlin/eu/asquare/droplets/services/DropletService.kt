@@ -29,7 +29,7 @@ class DropletService(
         if (filter.onlyUnread) {
             dropletRepository.findAllByGroupIdAndIsReadFalse(groupId)
         } else {
-            dropletRepository.findAllByGroupIdAndIsReadTrue(groupId)
+            dropletRepository.findAllByGroupId(groupId)
         }
             .sortedByDescending { it.created }
             .map { droplet ->
