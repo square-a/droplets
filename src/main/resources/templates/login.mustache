@@ -1,15 +1,24 @@
 {{#layout}}
-    <div class="container white">
-        <h1 class="page-title orange-text accent-2">Login</h1>
-        <section class="card blue-grey darken-4">
+    <div class="container login-container">
+        {{#groupCode}}
+            <section class="card lime blue-grey-text text-darken-3">
+                <div class="card-content">
+                    <span class="card-title">welcome</span>
+                    <p>Looks like you're just about to start sharing droplets. Here's your group code:</p>
+                    <h2 class="code-title">{{groupCode}}</h2>
+                </div>
+            </section>
+        {{/groupCode}}
+        <section class="card blue-grey darken-3 lime-text text-lighten-3">
             <form action="/login" method="post" class="card-content row">
+                <span class="card-title">login</span>
                 <div class="input-field col s6">
                     <input
                         type="text"
                         name="username"
                         id="username"
                         placeholder="little john"
-                        class="input white-text"
+                        class="input"
                     />
                     <label for="username">name</label>
                 </div>
@@ -19,7 +28,7 @@
                         name="password"
                         id="password"
                         placeholder="12345"
-                        class="input white-text"
+                        class="input"
                     />
                     <label for="password">group code</label>
                 </div>

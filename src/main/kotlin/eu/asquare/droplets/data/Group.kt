@@ -11,7 +11,7 @@ class Group(
     val id: Long,
 
     @Column(columnDefinition = "SMALLINT UNSIGNED")
-    val code: Short,
+    val code: Int,
 
     @OneToMany(mappedBy = "group")
     val users: Set<User> = setOf()
