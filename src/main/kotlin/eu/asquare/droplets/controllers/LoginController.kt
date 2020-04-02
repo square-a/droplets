@@ -1,6 +1,6 @@
-package eu.asquare.droplets.presentation
+package eu.asquare.droplets.controllers
 
-import eu.asquare.droplets.security.GroupService
+import eu.asquare.droplets.services.GroupService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set

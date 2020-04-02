@@ -1,4 +1,4 @@
-package eu.asquare.droplets.security
+package eu.asquare.droplets.services
 
 import eu.asquare.droplets.data.Group
 import eu.asquare.droplets.data.GroupRepository

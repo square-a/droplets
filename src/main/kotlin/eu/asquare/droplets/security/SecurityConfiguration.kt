@@ -1,5 +1,6 @@
 package eu.asquare.droplets.security
 
+import eu.asquare.droplets.services.DropletUserDetailService
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.builders.WebSecurity

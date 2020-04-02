@@ -1,5 +1,6 @@
-package eu.asquare.droplets.presentation
+package eu.asquare.droplets.controllers
 
+import eu.asquare.droplets.presentation.DropletFormData
 import eu.asquare.droplets.services.DropletService
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller

@@ -1,6 +1,7 @@
-package eu.asquare.droplets.security
+package eu.asquare.droplets.services
 
 import eu.asquare.droplets.data.UserRepository
+import eu.asquare.droplets.security.DropletUser
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
