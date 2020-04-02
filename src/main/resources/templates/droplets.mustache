@@ -3,14 +3,9 @@
     {{>droplet-form}}
 
     <ul class="section">
-        {{#droplets.unread}}
+        {{#droplets}}
             {{>droplet-item}}
-        {{/droplets.unread}}
-    </ul>
-    <ul class="section is-read" data-list="read">
-        {{#droplets.read}}
-            {{>droplet-item}}
-        {{/droplets.read}}
+        {{/droplets}}
     </ul>
 </div>
 <footer class="page-footer blue-grey lighten-5 blue-grey-text">

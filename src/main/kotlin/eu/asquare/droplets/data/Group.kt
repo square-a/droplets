@@ -14,5 +14,8 @@ class Group(
     val code: Int,
 
     @OneToMany(mappedBy = "group")
-    val users: Set<User> = setOf()
+    val users: Set<User> = setOf(),
+
+    @OneToMany(mappedBy = "group")
+    val droplets: Set<Droplet> = setOf()
 )

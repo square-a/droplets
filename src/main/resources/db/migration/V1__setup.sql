@@ -20,6 +20,8 @@ CREATE TABLE droplets (
     image_url       VARCHAR(2000),
     is_read         BOOLEAN         NOT NULL,
     user_id         INT UNSIGNED,
+    group_id        INT UNSIGNED,
 
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (group_id) REFERENCES groups(id) ON DELETE SET NULL
 );

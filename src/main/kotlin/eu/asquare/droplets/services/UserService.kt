@@ -10,4 +10,6 @@ class UserService(
     private val userRepository: UserRepository
 ) {
     fun create(group: Group) = userRepository.save(User(0L, "admin", group))
+
+    fun getOne(username: String) = userRepository.findByName(username)
 }

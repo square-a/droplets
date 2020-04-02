@@ -31,6 +31,10 @@ data class Droplet(
     @JoinColumn(name = "user_id")
     var user: User? = null
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id")
+    var group: Group? = null
+
     constructor(urlInfo: UrlInfo) : this(
         0L,
         urlInfo.url,
