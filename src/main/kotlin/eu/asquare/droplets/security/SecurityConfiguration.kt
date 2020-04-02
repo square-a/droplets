@@ -27,6 +27,7 @@ class SecurityConfiguration(
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
+                .loginPage("/login")
                 .permitAll()
     }
 

@@ -14,7 +14,7 @@ const getClickListener = id => async event => {
 };
 
 window.onload = () => {
-    readList = document.querySelector('[data-list="read"');
+    readList = document.querySelector('[data-list="read"]');
 
     document.querySelectorAll('[data-action="read"]').forEach(element => {
         element.addEventListener('click', getClickListener(element.dataset.id));
