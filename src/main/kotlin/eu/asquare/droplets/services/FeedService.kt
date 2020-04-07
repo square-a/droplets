@@ -2,8 +2,8 @@ package eu.asquare.droplets.services
 
 import com.rometools.rome.feed.synd.SyndContentImpl
 import com.rometools.rome.feed.synd.SyndEntryImpl
-import com.rometools.rome.feed.synd.SyndFeed
 import com.rometools.rome.feed.synd.SyndFeedImpl
+import com.rometools.rome.io.SyndFeedOutput
 import eu.asquare.droplets.presentation.DropletFilter
 import org.springframework.stereotype.Service
 import java.time.ZoneOffset
@@ -14,13 +14,17 @@ class FeedService(
     private val dropletService: DropletService,
     private val groupService: GroupService
 ) {
-    private val outputFeedType = "rss_2.0"
-    private val outputTitle = "Droplets"
+    private val channelType = "rss_2.0"
+    private val channelTitle = "Droplets"
+    private val channelDescription = "List of all unread droplets in your group"
+    private val channelLink = "https://no_url.invalid"
 
-    fun get(groupCode: Int): SyndFeed? {
+    fun get(groupCode: Int): String? {
         val feed = SyndFeedImpl().apply {
-            feedType = outputFeedType
-            title = outputTitle
+            feedType = channelType
+            title = channelTitle
+            description = channelDescription
+            link = channelLink
         }
         val filter = DropletFilter(onlyUnread = true)
         val group = groupService.get(groupCode) ?: return null
@@ -38,6 +42,6 @@ class FeedService(
             }
         }
 
-        return feed
+        return SyndFeedOutput().outputString(feed)
     }
 }
