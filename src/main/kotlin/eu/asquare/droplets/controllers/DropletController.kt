@@ -37,7 +37,7 @@ class DropletController(
         return "droplets"
     }
 
-    @GetMapping(value = ["droplets/feed/{groupCode}"], produces = ["application/xml"])
+    @GetMapping(value = ["droplets/feed/{groupCode}"], produces = ["application/rss+xml"])
     @ResponseBody
     fun getDropletFeed(
         @PathVariable
