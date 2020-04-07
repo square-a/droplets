@@ -59,6 +59,9 @@ dependencies {
     implementation("org.jsoup:jsoup:1.13.1") {
         because("It can read and parse target websites")
     }
+    implementation("com.rometools:rome:1.9.0") {
+        because("We want to provide an rss feed")
+    }
 
     developmentOnly("org.springframework.boot:spring-boot-devtools") {
         because("It enables hot reloading and other cool stuff")

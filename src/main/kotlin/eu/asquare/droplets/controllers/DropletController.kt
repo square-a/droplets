@@ -3,6 +3,7 @@ package eu.asquare.droplets.controllers
 import eu.asquare.droplets.presentation.DropletFilter
 import eu.asquare.droplets.presentation.DropletFormData
 import eu.asquare.droplets.services.DropletService
+import eu.asquare.droplets.services.FeedService
 import eu.asquare.droplets.services.UserService
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping(path = ["/"])
 class DropletController(
     private val dropletService: DropletService,
-    private val userService: UserService
+    private val userService: UserService,
+    private val feedService: FeedService
 ) {
 
     @GetMapping
@@ -34,6 +36,13 @@ class DropletController(
         model["page"] = "droplets"
         return "droplets"
     }
+
+    @GetMapping(value = ["droplets/feed/{groupCode}"])
+    @ResponseBody
+    fun getDropletFeed(
+        @PathVariable
+        groupCode: Int
+    ) = feedService.get(groupCode)
 
     @PostMapping(value = ["droplets"])
     fun createDroplet(

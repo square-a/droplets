@@ -25,6 +25,7 @@ class SecurityConfiguration(
         http.csrf().disable()
             .authorizeRequests()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/droplets/feed/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()

@@ -26,16 +26,19 @@ class DropletService(
     }
 
     fun getMany(groupId: Long, filter: DropletFilter) =
+        getManyEntities(groupId, filter)
+            .map { droplet ->
+                val shortUrl = urlInfoService.getShortUrl(droplet.url)
+                DropletResource(droplet).also { it.shortUrl = shortUrl }
+            }
+
+    fun getManyEntities(groupId: Long, filter: DropletFilter) =
         if (filter.onlyUnread) {
             dropletRepository.findAllByGroupIdAndIsReadFalse(groupId)
         } else {
             dropletRepository.findAllByGroupId(groupId)
         }
-            .sortedByDescending { it.created }
-            .map { droplet ->
-                val shortUrl = urlInfoService.getShortUrl(droplet.url)
-                DropletResource(droplet).also { it.shortUrl = shortUrl }
-            }
+        .sortedByDescending { it.created }
 
     fun markAsRead(id: Long) {
         val droplet = dropletRepository.findById(id).orElseThrow {

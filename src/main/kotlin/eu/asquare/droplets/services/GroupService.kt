@@ -20,4 +20,6 @@ class GroupService(
 
         return groupRepository.save(group)
     }
+
+    fun get(groupCode: Int) = groupRepository.findByCode(groupCode)
 }
